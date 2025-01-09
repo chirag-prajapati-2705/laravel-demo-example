@@ -1,5 +1,9 @@
 <?php
 
+use App\Greeting\CustomFacade;
+use App\Greeting\CustomLoggerFacade;
+use App\Greeting\GreetingFacade;
+use App\Test\TestFacade;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -141,7 +145,7 @@ return [
 
     'maintenance' => [
         'driver' => 'file',
-        // 'store'  => 'redis',
+        // 'store' => 'redis',
     ],
 
     /*
@@ -168,7 +172,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Spatie\Permission\PermissionServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
     ])->toArray(),
 
@@ -185,6 +189,14 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'Test'=> App\Test\TestFacade::class,
+        // 'Greeting' => App\Greeting\GreetingFacade::class,
+        // 'Custom'=>App\Greeting\CustomFacade::class,
+        'CustomLogger'=>GreetingFacade::class
+
+  
     ])->toArray(),
 
 ];

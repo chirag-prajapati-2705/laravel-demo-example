@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/dashboard';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -28,6 +29,17 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
 
+        // Route::resourceVerbs([
+        //     'create' => 'crear',
+        //     'edit' => 'editar',
+        // ]);
+
+        //Route::model('user', User::class);
+
+        Route::bind('user', function ($value) {
+            return User::where('id', $value)->first() ?? abort(404);
+        });
+    
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')
@@ -35,6 +47,9 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+                Route::middleware('web')
+                ->group(base_path('routes/custom.php'));
+
         });
     }
 }

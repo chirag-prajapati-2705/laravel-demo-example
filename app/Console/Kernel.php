@@ -13,6 +13,13 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+           // DB::table('recent_users')->delete();
+        })->daily();
+        $schedule->command('app:send-birthday')->daily();
+
+
+
     }
 
     /**
