@@ -35,7 +35,7 @@ class PostController extends Controller
         // dd($image);
         $categories = $this->category_repo->all();
         $relationship = ['image'];
-        $posts =Post::with($relationship)->paginate(500);
+        $posts =Post::with($relationship)->paginate(10);
         return view('post.index',compact('categories'))->with('posts',$posts);
     }
 

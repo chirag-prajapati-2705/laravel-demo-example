@@ -51,6 +51,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         // Create posts
         Post::factory(5)->create();
+        Category::factory(50)->create();
         //factory(Post::class, 5)->create();
 
         // Create videos

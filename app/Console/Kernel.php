@@ -16,10 +16,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
            // DB::table('recent_users')->delete();
         })->daily();
-        $schedule->command('app:send-birthday')->daily();
-
-
-
+        $schedule->command('app:send-email-to-user')->daily();
     }
 
     /**
